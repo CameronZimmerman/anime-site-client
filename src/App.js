@@ -10,6 +10,7 @@ import AuthPage from './Auth/AuthPage.js'
 import HomePage from './Home/HomePage.js'
 import PrivateRoute from './Components/PrivateRoute.js'
 import { getToken, setToken } from './utils/local-storage-utils.js'
+import './App.css'
 
 export default class App extends Component {
     state = {
@@ -39,7 +40,7 @@ export default class App extends Component {
                             render={(routerProps) => <SearchPage {...routerProps} />} 
                         />
                         <PrivateRoute 
-                            path="/favorites" 
+                            path="/favorites/:id" 
                             exact
                             token={this.state.token}
                             render={(routerProps) => <FavoritesPage {...routerProps} />} 

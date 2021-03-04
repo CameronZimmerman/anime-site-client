@@ -26,7 +26,7 @@ export default class AuthPage extends Component {
         let user = {email: this.state.loginUsername, password: this.state.loginPassword}
         let token = await loginUser(user)
         this.props.tokenHandler(token)
-        this.props.history.push('/favorites')
+        this.props.history.push('/search')
     }
     handleSignUpSubmit = async (e) => {
         e.preventDefault()
@@ -35,7 +35,7 @@ export default class AuthPage extends Component {
         try {
             let token = await signUpUser(user)
             this.props.tokenHandler(token)
-            this.props.history.push('/favorites')
+            this.props.history.push('/search')
         }
         catch(e) {
             this.setState({error: e.response.body.error})
@@ -46,7 +46,7 @@ export default class AuthPage extends Component {
     render() {
         return (
             <div>
-                {this.state.error!= '' && <h3>{this.state.error}</h3>}
+                {this.state.error !== '' && <h3>{this.state.error}</h3>}
                 <label> Login
                     <AuthForm kind='Login' handleUsernameChange={() => this.handleLoginUsernameChange} handlePasswordChange={() => this.handleLoginPasswordChange} handleSubmit={this.handleLoginSubmit} usernameValue = {this.state.loginUsername} passwordValue = {this.state.loginPassword}></AuthForm>
                 </label>
