@@ -9,7 +9,7 @@ import FavoritesPage from './Favorites/FavoritesPage.js'
 import AuthPage from './Auth/AuthPage.js'
 import HomePage from './Home/HomePage.js'
 import PrivateRoute from './Components/PrivateRoute.js'
-import { getToken } from './utils/local-storage-utils.js'
+import { getToken, setToken } from './utils/local-storage-utils.js'
 
 export default class App extends Component {
     state = {
@@ -17,6 +17,10 @@ export default class App extends Component {
     }
     componentDidMount() {
       this.setState({token: getToken()})
+    }
+    handleTokenChange = (token) => {
+        this.setState({token})
+        setToken(token)
     }
     render() {
         return (
@@ -43,7 +47,7 @@ export default class App extends Component {
                         <Route 
                           path="/login" 
                           exact
-                          render={(routerProps) => <AuthPage {...routerProps} />} 
+                          render={(routerProps) => <AuthPage {...routerProps} tokenHandler={this.handleTokenChange}/>} 
                         />
                     </Switch>
                 </Router>

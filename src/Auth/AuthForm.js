@@ -3,14 +3,15 @@ import React, { Component } from 'react'
 export default class AuthForm extends Component {
     render() {
         return (
-            <form>
+            <form onSubmit = {this.props.handleSubmit}>
                 <label> Email
-                    <input/>
+                    <input value = {this.props.usernameValue} onChange = {this.props.handleUsernameChange()}/>
                 </label>
 
                 <label> Password
-                    <input type='password'/>
+                    <input value = {this.props.passwordValue} onChange = {this.props.handlePasswordChange()}type='password'/>
                 </label>
+                <button>{this.props.kind}</button>
             </form>
         )
     }
