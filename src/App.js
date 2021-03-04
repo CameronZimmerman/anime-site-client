@@ -4,8 +4,8 @@ import {
     Route, 
     Switch,
 } from 'react-router-dom'
-import SearchPage from '.Search/SearchPage.js'
-import FavoritesPage from '.Favorites/FavoritesPage.js'
+import SearchPage from './Search/SearchPage.js'
+import FavoritesPage from './Favorites/FavoritesPage.js'
 import AuthPage from './Auth/AuthPage.js'
 import HomePage from './Home/HomePage.js'
 import PrivateRoute from './Components/PrivateRoute.js'
@@ -41,7 +41,7 @@ export default class App extends Component {
                             render={(routerProps) => <FavoritesPage {...routerProps} />} 
                         />
                         <Route 
-                          path="/auth" 
+                          path="/login" 
                           exact
                           render={(routerProps) => <AuthPage {...routerProps} />} 
                         />
