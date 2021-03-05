@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import AuthForm from './AuthForm.js'
 import { signUpUser, loginUser } from '../utils/api-utils.js'
+import { removeToken } from '../utils/local-storage-utils.js'
 export default class AuthPage extends Component {
     state = {
         loginUsername: '',
         loginPassword: '',
         signUpUsername: '',
         signUpPassword: '',
-        error: ''
+        error: '',
+    }
+    componentDidMount = () => {
+        if (this.props.token === "") this.setState({status: 'logged out'})
+        else this.setState({status: 'logged in'})
     }
     handleLoginUsernameChange = (e) => {
         this.setState({loginUsername: e.target.value})
@@ -42,10 +47,16 @@ export default class AuthPage extends Component {
         }
         
     }
+    handleSignOut = () => {
+        removeToken()
+        this.setState({status: 'logged out'})
+        window.location.reload()
+    }
 
     render() {
         return (
             <div>
+                {this.state.status === 'logged out' && <h3>Please log in</h3>}
                 {this.state.error !== '' && <h3>{this.state.error}</h3>}
                 <label> Login
                     <AuthForm kind='Login' handleUsernameChange={() => this.handleLoginUsernameChange} handlePasswordChange={() => this.handleLoginPasswordChange} handleSubmit={this.handleLoginSubmit} usernameValue = {this.state.loginUsername} passwordValue = {this.state.loginPassword}></AuthForm>
@@ -53,6 +64,10 @@ export default class AuthPage extends Component {
                 
                 <label> Sign Up
                     <AuthForm kind='SignUp' handleUsernameChange={() => this.handleSignUpUsernameChange} handlePasswordChange={() => this.handleSignUpPasswordChange} handleSubmit={this.handleSignUpSubmit} usernameValue = {this.state.signUpUsername} passwordValue = {this.state.signUpPassword}></AuthForm>
+                </label>
+
+                <label>
+                    <button onClick = {this.handleSignOut}>Sign out?</button>
                 </label>
             </div>
         )

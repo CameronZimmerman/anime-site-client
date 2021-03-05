@@ -4,6 +4,7 @@ import {
     Route, 
     Switch,
 } from 'react-router-dom'
+import Header from './Header/Header.js'
 import SearchPage from './Search/SearchPage.js'
 import FavoritesPage from './Favorites/FavoritesPage.js'
 import AuthPage from './Auth/AuthPage.js'
@@ -27,6 +28,7 @@ export default class App extends Component {
         return (
             <div>
                 <Router>
+                <Header token ={this.state.token}/>
                     <Switch>
                         <Route 
                           path="/home" 
@@ -40,15 +42,15 @@ export default class App extends Component {
                             render={(routerProps) => <SearchPage {...routerProps} />} 
                         />
                         <PrivateRoute 
-                            path="/favorites/:id" 
+                            path="/favorites" 
                             exact
-                            token={this.state.token}
-                            render={(routerProps) => <FavoritesPage {...routerProps} />} 
+                            token = {this.state.token}
+                            render={(routerProps) => <FavoritesPage token = {this.state.token} {...routerProps} />} 
                         />
                         <Route 
                           path="/login" 
                           exact
-                          render={(routerProps) => <AuthPage {...routerProps} tokenHandler={this.handleTokenChange}/>} 
+                          render={(routerProps) => <AuthPage token = {this.state.token}{...routerProps} tokenHandler={this.handleTokenChange}/>} 
                         />
                     </Switch>
                 </Router>

@@ -27,9 +27,18 @@
   border-bottom: 1px solid black;
 }
 
-.anime-list :hover:not(p):not(h3){
+.anime-item img {
+  position: fixed;
+  width: 20%;
+  height: auto;
+  filter: drop-shadow(1vh 1vh .75vh rgb(255, 255, 255));
+
+}
+
+.anime-list :hover:not(p):not(h3):not(img){
   transform: scale(1.1);
 }
+
 h1 {
   text-align: center;
   font-size: 2vw;
